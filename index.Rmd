@@ -1,0 +1,13 @@
+---
+title: "Panel Data Models"
+site: bookdown::bookdown_site
+github-repo: altaf-ali/panel_data_models
+---
+
+# Introduction
+
+...
+
+----
+
+*Last Updated: `r format(Sys.time(), "%b %d, %Y %l:%M %p")`*

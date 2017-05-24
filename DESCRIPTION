@@ -1,0 +1,5 @@
+Package: panel_data_models
+Title: Panel Data Models
+Version: 0.1.0
+Imports: bookdown, tidyverse, texreg, plm
+Remotes: altaf-ali/panel_data_models
