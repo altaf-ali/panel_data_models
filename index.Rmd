@@ -6,7 +6,15 @@ github-repo: altaf-ali/panel_data_models
 
 # Introduction
 
-...
+This workshop will take a practical look at panel data methods and models. Political scientists often approach research questions which have important time and space implications. Policy makers might face choices and questions of a similar nature: what effect does the building of a polluting power plant have on house prices? Is education a helpful tool to reduce the gender wage gap?  
+
+Panel data are useful to test hypotheses in these contexts, but come with new methodological and substantive challenges. Together we will look at these topics:
+
+- Panel data, what does it look like? How do we describe our samples?
+- Adapting Ordinary Least Squares to estimate models using panel data (especially focusing on the challenges of controlling for unobserved heterogeneity, errors, and lagged variables) 
+- Implementation of the models in R
+- Substantive interpretation of model results from a practical policy-making point of view.
+
 
 ----
 
