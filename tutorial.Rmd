@@ -31,14 +31,14 @@ guns <- read.csv("guns.csv")
 
 The variables we're interested in are described below.
 
-|Variable|Definition|
+| Variable | Definition |
 |------------|--------------------------------------------------------|
-|mur|Murder rate (incidents per 100,000)|
-|shall|= 1 if the state has a shall-carry law in effect in that year <br>= 0 otherwise|
-|incarc_rate|Incarceration rate in the state in the previous year (sentenced prisoners per 100,000 residents; value for the previous year)|
-|pm1029|Percent of state population that is male, ages 10 to 29|
-|stateid|ID number of states (Alabama = 1, Alaska = 2, etc.)|
-|year|Year (1977-1999)|
+| mur|Murder rate (incidents per 100,000)|
+| shall|= 1 if the state has a shall-carry law in effect in that year <br>= 0 otherwise|
+| incarc_rate|Incarceration rate in the state in the previous year (sentenced prisoners per 100,000 residents; value for the previous year)|
+| pm1029|Percent of state population that is male, ages 10 to 29|
+| stateid|ID number of states (Alabama = 1, Alaska = 2, etc.)|
+| year|Year (1977-1999)|
 
 We will focus on murder rates in this example but you could try the same with variables measuring violent crimes or robberies as well.
 
