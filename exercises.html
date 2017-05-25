@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Panel Data Models</title>
+  <meta name="description" content="Panel Data Models">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Panel Data Models" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="altaf-ali/panel_data_models" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Panel Data Models" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="hands-on-tutorial.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="css/readthedocs.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i><b>2</b> Acknowledgments</a></li>
+<li class="chapter" data-level="3" data-path="panel-data-models.html"><a href="panel-data-models.html"><i class="fa fa-check"></i><b>3</b> Panel Data Models</a><ul>
+<li class="chapter" data-level="3.1" data-path="panel-data-models.html"><a href="panel-data-models.html#fixed-effects-model"><i class="fa fa-check"></i><b>3.1</b> Fixed Effects Model</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="panel-data-models.html"><a href="panel-data-models.html#example-traffic-fatalities-and-beer-tax"><i class="fa fa-check"></i><b>3.1.1</b> Example: Traffic Fatalities and Beer Tax</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="panel-data-models.html"><a href="panel-data-models.html#assumptions-of-the-fixed-effects-model"><i class="fa fa-check"></i><b>3.2</b> Assumptions of the Fixed Effects Model</a></li>
+<li class="chapter" data-level="3.3" data-path="panel-data-models.html"><a href="panel-data-models.html#advantages-and-disadvantages"><i class="fa fa-check"></i><b>3.3</b> Advantages and Disadvantages</a></li>
+<li class="chapter" data-level="3.4" data-path="panel-data-models.html"><a href="panel-data-models.html#time-fixed-effects"><i class="fa fa-check"></i><b>3.4</b> Time Fixed Effects</a></li>
+<li class="chapter" data-level="3.5" data-path="panel-data-models.html"><a href="panel-data-models.html#time-and-unit-fixed-effects"><i class="fa fa-check"></i><b>3.5</b> Time and Unit Fixed Effects</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html"><i class="fa fa-check"></i><b>4</b> Violations of Assumptions</a><ul>
+<li class="chapter" data-level="4.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#assumption-2-in-panel-data"><i class="fa fa-check"></i><b>4.1</b> Assumption 2 in Panel Data</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#serial-correlation"><i class="fa fa-check"></i><b>4.1.1</b> Serial Correlation</a></li>
+<li class="chapter" data-level="4.1.2" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#cross-sectional-dependence"><i class="fa fa-check"></i><b>4.1.2</b> Cross-sectional dependence</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#panel-corrected-standard-errors"><i class="fa fa-check"></i><b>4.2</b> Panel-corrected Standard Errors</a></li>
+<li class="chapter" data-level="4.3" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#general-approach-to-correlation-between-panels"><i class="fa fa-check"></i><b>4.3</b> General Approach to Correlation Between Panels</a></li>
+<li class="chapter" data-level="4.4" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#your-roadmap-with-panel-data"><i class="fa fa-check"></i><b>4.4</b> Your Roadmap with Panel Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="hands-on-tutorial.html"><a href="hands-on-tutorial.html"><i class="fa fa-check"></i><b>5</b> Hands-on Tutorial</a><ul>
+<li class="chapter" data-level="5.1" data-path="hands-on-tutorial.html"><a href="hands-on-tutorial.html#more-guns-less-crimes"><i class="fa fa-check"></i><b>5.1</b> More Guns, Less Crimes</a></li>
+<li class="chapter" data-level="5.2" data-path="hands-on-tutorial.html"><a href="hands-on-tutorial.html#fixed-effects"><i class="fa fa-check"></i><b>5.2</b> Fixed Effects</a></li>
+<li class="chapter" data-level="5.3" data-path="hands-on-tutorial.html"><a href="hands-on-tutorial.html#serial-correlation-1"><i class="fa fa-check"></i><b>5.3</b> Serial Correlation</a></li>
+<li class="chapter" data-level="5.4" data-path="hands-on-tutorial.html"><a href="hands-on-tutorial.html#cross-sectional-dependence-1"><i class="fa fa-check"></i><b>5.4</b> Cross-sectional Dependence</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>6</b> Exercises</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Panel Data Models</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exercises" class="section level1">
+<h1><span class="header-section-number">6</span> Exercises</h1>
+<p>Download the traffic fatality dataset used in Stock and Watson examples. It covers data from 48 states observed over seven years (from 1982 to 1988), for a total of 336 observations.</p>
+<ul>
+<li><strong><a href="https://altaf-ali.github.io/panel_data_models/data/fatality.dta">Dataset</a></strong></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">mrall</td>
+<td align="left">Vehicle Fatality Rate (VFR)</td>
+</tr>
+<tr class="even">
+<td align="left">beertax</td>
+<td align="left">Tax on Case of Beer</td>
+</tr>
+<tr class="odd">
+<td align="left">mlda</td>
+<td align="left">Minimum Legal Drinking Age</td>
+</tr>
+<tr class="even">
+<td align="left">jaild</td>
+<td align="left">Mandatory Jail Sentence</td>
+</tr>
+<tr class="odd">
+<td align="left">vmiles</td>
+<td align="left">Average Mile per Driver</td>
+</tr>
+<tr class="even">
+<td align="left">unrate</td>
+<td align="left">Unemployment Rate</td>
+</tr>
+<tr class="odd">
+<td align="left">perinc</td>
+<td align="left">Per Capita Personal Income</td>
+</tr>
+</tbody>
+</table>
+<ol style="list-style-type: decimal">
+<li>Estimate a model for Vehicle Fatality Rate using your choice of variables listed above.
+<ul>
+<li>Estimate a fixed effect model and test for state and time fixed effects.</li>
+<li>Run the necessary tests to check whether state and time fixed effects are present.</li>
+</ul></li>
+<li>Estimate a twoway model and compare to the previous state and time fixed effect models.</li>
+<li>Test for serial correlation and cross sectional dependence in the twoway model.</li>
+<li>If either serial correlation or cross sectional dependence is present, use the methods you’ve learned to obtain heteroskedastic and autocorrelation consistent standard errors.</li>
+<li>Compare the HAC and spatially robust standard errors with the twoway model estimated earlier.</li>
+<li>Display the results in publication-ready tables and discuss the substantively significant findings.</li>
+</ol>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="hands-on-tutorial.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": {}
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

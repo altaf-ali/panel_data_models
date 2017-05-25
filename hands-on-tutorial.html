@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Panel Data Models</title>
+  <meta name="description" content="Panel Data Models">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Panel Data Models" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="altaf-ali/panel_data_models" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Panel Data Models" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="violations-of-assumptions.html">
+<link rel="next" href="exercises.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="css/readthedocs.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i><b>2</b> Acknowledgments</a></li>
+<li class="chapter" data-level="3" data-path="panel-data-models.html"><a href="panel-data-models.html"><i class="fa fa-check"></i><b>3</b> Panel Data Models</a><ul>
+<li class="chapter" data-level="3.1" data-path="panel-data-models.html"><a href="panel-data-models.html#fixed-effects-model"><i class="fa fa-check"></i><b>3.1</b> Fixed Effects Model</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="panel-data-models.html"><a href="panel-data-models.html#example-traffic-fatalities-and-beer-tax"><i class="fa fa-check"></i><b>3.1.1</b> Example: Traffic Fatalities and Beer Tax</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="panel-data-models.html"><a href="panel-data-models.html#assumptions-of-the-fixed-effects-model"><i class="fa fa-check"></i><b>3.2</b> Assumptions of the Fixed Effects Model</a></li>
+<li class="chapter" data-level="3.3" data-path="panel-data-models.html"><a href="panel-data-models.html#advantages-and-disadvantages"><i class="fa fa-check"></i><b>3.3</b> Advantages and Disadvantages</a></li>
+<li class="chapter" data-level="3.4" data-path="panel-data-models.html"><a href="panel-data-models.html#time-fixed-effects"><i class="fa fa-check"></i><b>3.4</b> Time Fixed Effects</a></li>
+<li class="chapter" data-level="3.5" data-path="panel-data-models.html"><a href="panel-data-models.html#time-and-unit-fixed-effects"><i class="fa fa-check"></i><b>3.5</b> Time and Unit Fixed Effects</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html"><i class="fa fa-check"></i><b>4</b> Violations of Assumptions</a><ul>
+<li class="chapter" data-level="4.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#assumption-2-in-panel-data"><i class="fa fa-check"></i><b>4.1</b> Assumption 2 in Panel Data</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#serial-correlation"><i class="fa fa-check"></i><b>4.1.1</b> Serial Correlation</a></li>
+<li class="chapter" data-level="4.1.2" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#cross-sectional-dependence"><i class="fa fa-check"></i><b>4.1.2</b> Cross-sectional dependence</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#panel-corrected-standard-errors"><i class="fa fa-check"></i><b>4.2</b> Panel-corrected Standard Errors</a></li>
+<li class="chapter" data-level="4.3" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#general-approach-to-correlation-between-panels"><i class="fa fa-check"></i><b>4.3</b> General Approach to Correlation Between Panels</a></li>
+<li class="chapter" data-level="4.4" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#your-roadmap-with-panel-data"><i class="fa fa-check"></i><b>4.4</b> Your Roadmap with Panel Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="hands-on-tutorial.html"><a href="hands-on-tutorial.html"><i class="fa fa-check"></i><b>5</b> Hands-on Tutorial</a><ul>
+<li class="chapter" data-level="5.1" data-path="hands-on-tutorial.html"><a href="hands-on-tutorial.html#more-guns-less-crimes"><i class="fa fa-check"></i><b>5.1</b> More Guns, Less Crimes</a></li>
+<li class="chapter" data-level="5.2" data-path="hands-on-tutorial.html"><a href="hands-on-tutorial.html#fixed-effects"><i class="fa fa-check"></i><b>5.2</b> Fixed Effects</a></li>
+<li class="chapter" data-level="5.3" data-path="hands-on-tutorial.html"><a href="hands-on-tutorial.html#serial-correlation-1"><i class="fa fa-check"></i><b>5.3</b> Serial Correlation</a></li>
+<li class="chapter" data-level="5.4" data-path="hands-on-tutorial.html"><a href="hands-on-tutorial.html#cross-sectional-dependence-1"><i class="fa fa-check"></i><b>5.4</b> Cross-sectional Dependence</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>6</b> Exercises</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Panel Data Models</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="hands-on-tutorial" class="section level1">
+<h1><span class="header-section-number">5</span> Hands-on Tutorial</h1>
+<p>Let’s start by load these packages:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plm)
+<span class="kw">library</span>(lmtest)
+<span class="kw">library</span>(texreg)</code></pre></div>
+<p>Clear the environment</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
+<div id="more-guns-less-crimes" class="section level2">
+<h2><span class="header-section-number">5.1</span> More Guns, Less Crimes</h2>
+<p>Download the guns dataset used by Stock and Watson.</p>
+<ul>
+<li><strong><a href="http://uclspp.github.io/PUBLG100/data/guns.csv">Dataset</a></strong></li>
+<li><strong><a href="http://wps.aw.com/wps/media/objects/11422/11696965/data3eu/Guns_Description.pdf">Codebook</a></strong></li>
+</ul>
+<p>Gun rights advocate John Lott argues in his book <a href="https://en.wikipedia.org/wiki/More_Guns,_Less_Crime">More Guns, Less Crimes</a> that crime rates in the United States decrease when gun ownership restrictions are relaxed. The data used in Lott’s research compares violent crimes, robberies, and murders across 50 states to determine whether the so called “shall” laws that remove discretion from license granting authorities actually decrease crime rates. So far 41 states have passed these “shall” laws where a person applying for a licence to carry a concealed weapon doesn’t have to provide justification or “good cause” for requiring a concealed weapon permit.</p>
+<p>Let’s load the dataset used by Lott and see if we can test the arguments made by gun rights advocates.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">guns &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;guns.csv&quot;</span>)</code></pre></div>
+<p>The variables we’re interested in are described below.</p>
+<table style="width:97%;">
+<colgroup>
+<col width="18%" />
+<col width="79%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">mur</td>
+<td align="left">Murder rate (incidents per 100,000)</td>
+</tr>
+<tr class="even">
+<td align="left">shall</td>
+<td align="left">= 1 if the state has a shall-carry law in effect in that year <br>= 0 otherwise</td>
+</tr>
+<tr class="odd">
+<td align="left">incarc_rate</td>
+<td align="left">Incarceration rate in the state in the previous year (sentenced prisoners per 100,000 residents; value for the previous year)</td>
+</tr>
+<tr class="even">
+<td align="left">pm1029</td>
+<td align="left">Percent of state population that is male, ages 10 to 29</td>
+</tr>
+<tr class="odd">
+<td align="left">stateid</td>
+<td align="left">ID number of states (Alabama = 1, Alaska = 2, etc.)</td>
+</tr>
+<tr class="even">
+<td align="left">year</td>
+<td align="left">Year (1977-1999)</td>
+</tr>
+</tbody>
+</table>
+<p>We will focus on murder rates in this example but you could try the same with variables measuring violent crimes or robberies as well.</p>
+<p>Let’s create a factor variable representing whether a state has passed “shall” law or not. The variable already exists as <code>0</code> or <code>1</code> but we want to convert it to a factor for our analysis.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">guns$shall &lt;-<span class="st"> </span><span class="kw">factor</span>(guns$shall, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">labels =</span><span class="kw">c</span>(<span class="st">&quot;NO&quot;</span>, <span class="st">&quot;YES&quot;</span>))</code></pre></div>
+</div>
+<div id="fixed-effects" class="section level2">
+<h2><span class="header-section-number">5.2</span> Fixed Effects</h2>
+<p>Let’s estimate a fixed effect model on panel data using the <code>plm()</code> function with <code>shall</code>, <code>incarc_rate</code>, and <code>pm1029</code> as the independent variables.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">state_effects &lt;-<span class="st"> </span><span class="kw">plm</span>(mur ~<span class="st"> </span>shall +<span class="st"> </span>incarc_rate +<span class="st"> </span>pm1029, 
+                     <span class="dt">data =</span> guns, 
+                     <span class="dt">index =</span> <span class="kw">c</span>(<span class="st">&quot;stateid&quot;</span>, <span class="st">&quot;year&quot;</span>), 
+                     <span class="dt">model =</span> <span class="st">&quot;within&quot;</span>, 
+                     <span class="dt">effect =</span> <span class="st">&quot;individual&quot;</span>)
+
+<span class="kw">summary</span>(state_effects)</code></pre></div>
+<pre><code>## Oneway (individual) effect Within Model
+## 
+## Call:
+## plm(formula = mur ~ shall + incarc_rate + pm1029, data = guns, 
+##     effect = &quot;individual&quot;, model = &quot;within&quot;, index = c(&quot;stateid&quot;, 
+##         &quot;year&quot;))
+## 
+## Balanced Panel: n=51, T=23, N=1173
+## 
+## Residuals :
+##       Min.    1st Qu.     Median    3rd Qu.       Max. 
+## -21.102428  -0.958945   0.016047   1.082008  29.031961 
+## 
+## Coefficients :
+##               Estimate Std. Error t-value  Pr(&gt;|t|)    
+## shallYES    -1.4513886  0.3154300 -4.6013 4.678e-06 ***
+## incarc_rate  0.0174551  0.0011261 15.4998 &lt; 2.2e-16 ***
+## pm1029       0.9582993  0.0859610 11.1481 &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Total Sum of Squares:    12016
+## Residual Sum of Squares: 9800
+## R-Squared:      0.18444
+## Adj. R-Squared: 0.14581
+## F-statistic: 84.3526 on 3 and 1119 DF, p-value: &lt; 2.22e-16</code></pre>
+<p>The <code>state_effects</code> model shows that all three of our independent variables are statistically significant, with <code>shall</code> decreasing murder rates by <code>1.45</code> incidents per <code>100000</code> members of the population. The effects of incarceration rate and percentage of male population between <code>10</code> and <code>29</code> years old are also statistically significant.</p>
+<p>Before drawing any conclusions let’s make sure whether there are any state effects in our model using <a href="http://bit.ly/r_plmtest"><code>plmtest()</code></a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plmtest</span>(state_effects, <span class="dt">effect=</span><span class="st">&quot;individual&quot;</span>)</code></pre></div>
+<pre><code>## 
+##  Lagrange Multiplier Test - (Honda) for balanced panels
+## 
+## data:  mur ~ shall + incarc_rate + pm1029
+## normal = 47.242, p-value &lt; 2.2e-16
+## alternative hypothesis: significant effects</code></pre>
+<p>The p-value suggests the presence of state effects. In addition to state fixed effects, a number of factors could affect the murder rate that are not specific to an individual state. We can model these time fixed effects using the <code>effect = &quot;time&quot;</code> argument in <a href="http://bit.ly/r_plm"><code>plm()</code></a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">time_effects &lt;-<span class="st"> </span><span class="kw">plm</span>(mur ~<span class="st"> </span>shall +<span class="st"> </span>incarc_rate +<span class="st"> </span>pm1029, 
+                    <span class="dt">data =</span> guns, 
+                    <span class="dt">index =</span> <span class="kw">c</span>(<span class="st">&quot;stateid&quot;</span>, <span class="st">&quot;year&quot;</span>), 
+                    <span class="dt">model =</span> <span class="st">&quot;within&quot;</span>, 
+                    <span class="dt">effect =</span> <span class="st">&quot;time&quot;</span>)
+
+<span class="kw">summary</span>(time_effects)</code></pre></div>
+<pre><code>## Oneway (time) effect Within Model
+## 
+## Call:
+## plm(formula = mur ~ shall + incarc_rate + pm1029, data = guns, 
+##     effect = &quot;time&quot;, model = &quot;within&quot;, index = c(&quot;stateid&quot;, &quot;year&quot;))
+## 
+## Balanced Panel: n=51, T=23, N=1173
+## 
+## Residuals :
+##      Min.   1st Qu.    Median   3rd Qu.      Max. 
+## -21.68350  -2.04596  -0.31955   1.76758  35.20084 
+## 
+## Coefficients :
+##               Estimate Std. Error t-value Pr(&gt;|t|)    
+## shallYES    -0.2521605  0.3032163 -0.8316   0.4058    
+## incarc_rate  0.0412157  0.0007704 53.4993   &lt;2e-16 ***
+## pm1029       0.2148597  0.1407613  1.5264   0.1272    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Total Sum of Squares:    65571
+## Residual Sum of Squares: 18141
+## R-Squared:      0.72334
+## Adj. R-Squared: 0.71731
+## F-statistic: 999.623 on 3 and 1147 DF, p-value: &lt; 2.22e-16</code></pre>
+<p>The <code>incarc_rate</code> variable is the only statistically significant variable in the time fixed effects model.</p>
+<p>Now let’s run <code>plmtest</code> on the <code>time_effects</code> model to verify if time fixed effects are indeed present in the model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plmtest</span>(time_effects, <span class="dt">effect=</span><span class="st">&quot;time&quot;</span>)</code></pre></div>
+<pre><code>## 
+##  Lagrange Multiplier Test - time effects (Honda) for balanced
+##  panels
+## 
+## data:  mur ~ shall + incarc_rate + pm1029
+## normal = 16.104, p-value &lt; 2.2e-16
+## alternative hypothesis: significant effects</code></pre>
+<p>The <em>p-value</em> tells us that we can reject the null hypothesis so we know that there are time fixed effects present in our model.</p>
+<p>We already confirmed the presence of state fixed effects in the first model we estimated. Now, in order to control for both state AND time fixed effects, we need to estimate a model using the <code>effect = &quot;twoways&quot;</code> argument.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">twoway_effects &lt;-<span class="st"> </span><span class="kw">plm</span>(mur ~<span class="st"> </span>shall +<span class="st"> </span>incarc_rate +<span class="st"> </span>pm1029, 
+                      <span class="dt">data =</span> guns, 
+                      <span class="dt">index =</span> <span class="kw">c</span>(<span class="st">&quot;stateid&quot;</span>, <span class="st">&quot;year&quot;</span>), 
+                      <span class="dt">model =</span> <span class="st">&quot;within&quot;</span>, 
+                      <span class="dt">effect =</span> <span class="st">&quot;twoways&quot;</span>)
+
+<span class="kw">summary</span>(twoway_effects)</code></pre></div>
+<pre><code>## Twoways effects Within Model
+## 
+## Call:
+## plm(formula = mur ~ shall + incarc_rate + pm1029, data = guns, 
+##     effect = &quot;twoways&quot;, model = &quot;within&quot;, index = c(&quot;stateid&quot;, 
+##         &quot;year&quot;))
+## 
+## Balanced Panel: n=51, T=23, N=1173
+## 
+## Residuals :
+##        Min.     1st Qu.      Median     3rd Qu.        Max. 
+## -19.2097691  -0.9748749  -0.0069663   1.0119176  27.1354552 
+## 
+## Coefficients :
+##               Estimate Std. Error t-value  Pr(&gt;|t|)    
+## shallYES    -0.5640474  0.3325054 -1.6964 0.0901023 .  
+## incarc_rate  0.0209756  0.0011252 18.6411 &lt; 2.2e-16 ***
+## pm1029       0.7326357  0.2189770  3.3457 0.0008485 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Total Sum of Squares:    11263
+## Residual Sum of Squares: 8519.4
+## R-Squared:      0.24357
+## Adj. R-Squared: 0.19186
+## F-statistic: 117.746 on 3 and 1097 DF, p-value: &lt; 2.22e-16</code></pre>
+<p>In a twoway fixed effects model <code>shall</code> is no longer significant and the effect of male population between <code>10</code> and <code>29</code> years old has decreased from <code>0.95</code> to <code>0.73</code> incidents per <code>100,000</code> population.</p>
+<p>The results of all three models are shown below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">screenreg</span>(<span class="kw">list</span>(state_effects, time_effects, twoway_effects), 
+          <span class="dt">custom.model.names =</span> <span class="kw">c</span>(<span class="st">&quot;State Fixed Effects&quot;</span>, 
+                                 <span class="st">&quot;Time Fixed Effects&quot;</span>, 
+                                 <span class="st">&quot;Twoway Fixed Effects&quot;</span>))</code></pre></div>
+<pre><code>## 
+## ==========================================================================
+##              State Fixed Effects  Time Fixed Effects  Twoway Fixed Effects
+## --------------------------------------------------------------------------
+## shallYES       -1.45 ***            -0.25               -0.56             
+##                (0.32)               (0.30)              (0.33)            
+## incarc_rate     0.02 ***             0.04 ***            0.02 ***         
+##                (0.00)               (0.00)              (0.00)            
+## pm1029          0.96 ***             0.21                0.73 ***         
+##                (0.09)               (0.14)              (0.22)            
+## --------------------------------------------------------------------------
+## R^2             0.18                 0.72                0.24             
+## Adj. R^2        0.15                 0.72                0.19             
+## Num. obs.    1173                 1173                1173                
+## ==========================================================================
+## *** p &lt; 0.001, ** p &lt; 0.01, * p &lt; 0.05</code></pre>
+</div>
+<div id="serial-correlation-1" class="section level2">
+<h2><span class="header-section-number">5.3</span> Serial Correlation</h2>
+<p>For time series data we need to address the potential for serial correlation in the error term. We will test for serial correlation with Breusch-Godfrey test using <code>pbgtest()</code> and provide solutions for correcting it if necessary.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pbgtest</span>(twoway_effects)</code></pre></div>
+<pre><code>## 
+##  Breusch-Godfrey/Wooldridge test for serial correlation in panel
+##  models
+## 
+## data:  mur ~ shall + incarc_rate + pm1029
+## chisq = 765.16, df = 23, p-value &lt; 2.2e-16
+## alternative hypothesis: serial correlation in idiosyncratic errors</code></pre>
+<p>The null hypothesis for the Breusch-Godfrey test is that there is no serial correlation. The <code>p-value</code> from the test tells us that we can reject the null hypothesis and confirms the presence of serial correlation in our error term.</p>
+<p>We can correct for serial correlation using <a href="http://bit.ly/r_coeftest"><code>coeftest()</code></a> similar to how we corrected for heteroskedastic errors. We’ll use the <a href="http://bit.ly/r_vcovHC"><code>vcovHC()</code></a> function for obtaining a heteroskedasticity-consistent covariance matrix, but since we’re interested in correcting for autocorrelation as well, we will specify <code>method = &quot;arellano&quot;</code> which corrects for both heteroskedasticity and autocorrelation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">twoway_effects_hac &lt;-<span class="st"> </span><span class="kw">coeftest</span>(twoway_effects, 
+                               <span class="dt">vcov =</span> <span class="kw">vcovHC</span>(twoway_effects, 
+                                             <span class="dt">method =</span> <span class="st">&quot;arellano&quot;</span>, 
+                                             <span class="dt">type =</span> <span class="st">&quot;HC3&quot;</span>))
+
+<span class="kw">screenreg</span>(<span class="kw">list</span>(twoway_effects, twoway_effects_hac),
+          <span class="dt">custom.model.names =</span> <span class="kw">c</span>(<span class="st">&quot;Twoway Fixed Effects&quot;</span>, 
+                                 <span class="st">&quot;Twoway Fixed Effects (HAC)&quot;</span>))</code></pre></div>
+<pre><code>## 
+## =============================================================
+##              Twoway Fixed Effects  Twoway Fixed Effects (HAC)
+## -------------------------------------------------------------
+## shallYES       -0.56               -0.56                     
+##                (0.33)              (0.48)                    
+## incarc_rate     0.02 ***            0.02 *                   
+##                (0.00)              (0.01)                    
+## pm1029          0.73 ***            0.73                     
+##                (0.22)              (0.54)                    
+## -------------------------------------------------------------
+## R^2             0.24                                         
+## Adj. R^2        0.19                                         
+## Num. obs.    1173                                            
+## =============================================================
+## *** p &lt; 0.001, ** p &lt; 0.01, * p &lt; 0.05</code></pre>
+<p>We can see that with heteroskedasticity and autocorrelation consistent (HAC) standard errors, the percent of male population (10 - 29 yr old) is no longer a significant predictor in our model.</p>
+</div>
+<div id="cross-sectional-dependence-1" class="section level2">
+<h2><span class="header-section-number">5.4</span> Cross-sectional Dependence</h2>
+<p>If a federal law imposed restrictions on gun ownership or licensing requirements then the changes would likely affect all 50 states. This is an example of Cross Sectional Dependence and not accounted for in a fixed effect model. Other scenarios could also trigger cross sectional dependence that we should take into consideration. For example, security policies and law enforcement efforts might change after an extraordinary event (think of mass shootings or terrorist attacks) thus influencing law enforcement practices in all states. We can check for cross sectional dependence using the Pesaran cross sectional dependence test or <a href="http://bit.ly/r_pcdtest"><code>pcdtest()</code></a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pcdtest</span>(twoway_effects)</code></pre></div>
+<pre><code>## 
+##  Pesaran CD test for cross-sectional dependence in panels
+## 
+## data:  mur ~ shall + incarc_rate + pm1029
+## z = 3.9121, p-value = 9.148e-05
+## alternative hypothesis: cross-sectional dependence</code></pre>
+<p>As we’ve seen with other tests, the null hypothesis is that there is no cross sectional dependence. The p-value, however tells that there is indeed cross-sectional dependence and we need to correct it. There are two general approaches to correcting for cross sectional dependence.</p>
+<p><strong>Beck and Katz (1995) method or Panel Corrected Standard Errors (PCSE)</strong>: We can obtain Panel Corrected Standard Errors (PCSE) by first obtaining a robust variance-covariance matrix for panel models with the Beck and Katz (1995) method using the <a href="(http://bit.ly/r_vcovBK)"><code>vcovBK()</code></a> and passing it to the familiar <a href="http://bit.ly/r_coeftest"><code>coeftest()</code></a> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">twoway_effects_pcse &lt;-<span class="st"> </span><span class="kw">coeftest</span>(twoway_effects, 
+                                <span class="dt">vcov =</span> <span class="kw">vcovBK</span>(twoway_effects, 
+                                              <span class="dt">type=</span><span class="st">&quot;HC3&quot;</span>, 
+                                              <span class="dt">cluster =</span> <span class="st">&quot;group&quot;</span>)) 
+
+twoway_effects_pcse</code></pre></div>
+<pre><code>## 
+## t test of coefficients:
+## 
+##               Estimate Std. Error t value  Pr(&gt;|t|)    
+## shallYES    -0.5640474  0.7662556 -0.7361    0.4618    
+## incarc_rate  0.0209756  0.0028249  7.4253 2.254e-13 ***
+## pm1029       0.7326357  0.5118496  1.4313    0.1526    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The results from PCSE are sensitive to the ratio between the number of time periods in the dataset (T) and the total number of observations (N). When we’re dealing with large datasets (i.e. the T/N ratio is small), we use the Driscoll and Kraay method instead.</p>
+<p><strong>Driscoll and Kraay (1998) (SCC)</strong>: The cross-sectional and serial correlation (SCC) method by Driscoll and Kraay addresses the limitations of Beck and Katz’s PCSE method is therefore preferred for obtaining heteroskedasticity and autocorrelation consistent errors that are also robust to cross-sectional dependence. We can get SCC corrected covariance matrix using the <a href="http://bit.ly/r_vcovSCC"><code>vcovSCC()</code></a> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">twoway_effects_scc &lt;-<span class="st"> </span><span class="kw">coeftest</span>(twoway_effects,
+                               <span class="dt">vcov =</span> <span class="kw">vcovSCC</span>(twoway_effects, 
+                                              <span class="dt">type=</span><span class="st">&quot;HC3&quot;</span>, 
+                                              <span class="dt">cluster =</span> <span class="st">&quot;group&quot;</span>))
+
+twoway_effects_scc</code></pre></div>
+<pre><code>## 
+## t test of coefficients:
+## 
+##              Estimate Std. Error t value Pr(&gt;|t|)  
+## shallYES    -0.564047   0.542698 -1.0393  0.29888  
+## incarc_rate  0.020976   0.010321  2.0324  0.04236 *
+## pm1029       0.732636   0.551066  1.3295  0.18396  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">screenreg</span>(<span class="kw">list</span>(state_effects, 
+               time_effects, 
+               twoway_effects, 
+               twoway_effects_pcse, 
+               twoway_effects_scc), 
+          <span class="dt">custom.model.names =</span> <span class="kw">c</span>(<span class="st">&quot;State Effects&quot;</span>, 
+                                 <span class="st">&quot;Time Effects&quot;</span>, 
+                                 <span class="st">&quot;Twoway Fixed Effects&quot;</span>, 
+                                 <span class="st">&quot;PCSE&quot;</span>, 
+                                 <span class="st">&quot;SCC&quot;</span>))</code></pre></div>
+<pre><code>## 
+## ==================================================================================
+##              State Effects  Time Effects  Twoway Fixed Effects  PCSE       SCC    
+## ----------------------------------------------------------------------------------
+## shallYES       -1.45 ***      -0.25         -0.56               -0.56      -0.56  
+##                (0.32)         (0.30)        (0.33)              (0.77)     (0.54) 
+## incarc_rate     0.02 ***       0.04 ***      0.02 ***            0.02 ***   0.02 *
+##                (0.00)         (0.00)        (0.00)              (0.00)     (0.01) 
+## pm1029          0.96 ***       0.21          0.73 ***            0.73       0.73  
+##                (0.09)         (0.14)        (0.22)              (0.51)     (0.55) 
+## ----------------------------------------------------------------------------------
+## R^2             0.18           0.72          0.24                                 
+## Adj. R^2        0.15           0.72          0.19                                 
+## Num. obs.    1173           1173          1173                                    
+## ==================================================================================
+## *** p &lt; 0.001, ** p &lt; 0.01, * p &lt; 0.05</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="violations-of-assumptions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exercises.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": {}
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
