@@ -19,8 +19,7 @@ that vary over the cross-sectional units but are constant over time.
 
 ### Example: Traffic Fatalities and Beer Tax
 
-Dataset from Stock & Watson (Ch.10), covers state traffic fatality data
-available for 48 states observed over seven years (from 1982 to 1988), for a total of 336 observations. 
+Dataset from Stock & Watson (Ch.10), covers state traffic fatality data available for 48 states observed over seven years (from 1982 to 1988), for a total of 336 observations. 
 
 ```{r echo = FALSE, message = FALSE}
 library(tidyverse)
