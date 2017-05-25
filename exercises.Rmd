@@ -1,0 +1,26 @@
+# Exercises
+
+Download the traffic fatality dataset used in Stock and Watson examples. It covers data from 48 states observed over seven years (from 1982 to 1988), for a total of 336 observations.
+
+- **[Dataset](https://altaf-ali.github.io/panel_data_models/data/fatality.dta)**
+
+| Variable | Description |
+|----------|---------------|
+| mrall | Vehicle Fatality Rate (VFR) |
+| beertax | Tax on Case of Beer |
+| mlda | Minimum Legal Drinking Age |
+| jaild | Mandatory Jail Sentence |
+| vmiles | Average Mile per Driver |
+| unrate | Unemployment Rate |
+| perinc | Per Capita Personal Income |
+
+1. Estimate a model for Vehicle Fatality Rate using your choice of variables listed above.
+    - Estimate a fixed effect model and test for state and time fixed effects.
+    - Run the necessary tests to check whether state and time fixed effects are present.
+1. Estimate a twoway model and compare to the previous state and time fixed effect models.
+1. Test for serial correlation and cross sectional dependence in the twoway model. 
+1. If either serial correlation or cross sectional dependence is present, use the methods you've learned to obtain heteroskedastic and autocorrelation consistent standard errors.
+1. Compare the HAC and spatially robust standard errors with the twoway model estimated earlier.
+1. Display the results in publication-ready tables and discuss the substantively significant findings.
+
+

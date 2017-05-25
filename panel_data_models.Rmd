@@ -1,0 +1,180 @@
+# Panel Data Models
+
+- Panel data are datasets in which a set of units (for example people) are
+observed for several time periods.
+
+- If experimental data are not available, then the use of panel data is
+one important approach to reduce the problem of omitted variable bias.
+
+- There are many empirical research areas where results that are not based
+on panel data are no longer taken seriously.
+
+## Fixed Effects Model
+
+- The fixed effects model is simply a variation on the linear regression
+model.
+
+- Its key advantage is that it enables us to control for all variables
+that vary over the cross-sectional units but are constant over time.
+
+### Example: Traffic Fatalities and Beer Tax
+
+Dataset from Stock & Watson (Ch.10), covers state traffic fatality data
+available for 48 states observed over seven years (from 1982 to 1988), for a total of 336 observations. 
+
+```{r echo = FALSE, message = FALSE}
+library(tidyverse)
+library(haven)
+
+fatality <- read_dta("./data/fatality.dta")
+
+fatality %>%
+  mutate(state = as.numeric(state)) %>% 
+  left_join(maps::state.fips, by = c("state" = "fips")) %>% 
+  select(state = abb, year, mrall, beertax, mlda, jaild, vmiles, unrate, perinc) %>% 
+  head(n = 10) %>% 
+  knitr::kable()
+
+```
+
+## Assumptions of the Fixed Effects Model
+
+- The fixed effects model assumes that the true relationship is:
+
+    $$\begin{aligned}
+    y_{i,t} = \beta_0 + \beta_1x_{i,t} + \beta_2z_i + u_{i,t} \end{aligned}$$
+    
+    where in the S&W example $y_{i,t}$ would be the number of traffic
+    fatalities and $x_{i,t}$ the beer tax in state $i$ in year $t$.
+
+- Note that the variable $z_i$ does not have a time index and is therefore
+assumed to be constant over time.
+
+- In this example $z_i$ could be the social attitude towards drunk driving
+in state $i$.
+
+- If we define $\alpha_i = \beta_0 + \beta_2z_i$, then (1) simplifies to
+
+    $$\begin{aligned}
+    y_{i,t} = \alpha_i + \beta_1x_{i,t} + u_{i,t} \end{aligned}$$
+
+- The graphical interpretation of $\alpha_i$ is that it is the intercept
+of the relationship between alcohol taxes and traffic fatalities in
+state $i$.
+
+- It is straightforward to allow for further variables which are constant
+over time in (1).
+
+- In this case the intercepts $\alpha_i$ reflect the combined effect of
+several variables which are constant over time.
+
+![](./img/fixed_effects.png)
+
+## Advantages and Disadvantages
+
+- The key advantage of the fixed effects model is that it allows us to
+control for all time invariant omitted variables.
+
+- This is particularly important in the case of variables which are
+difficult or impossible to observe.
+
+- The key disadvantage is that we have to estimate a number of additional
+parameters.
+
+- Furthermore, it will be impossible to estimate the effect of variables
+which do not (or hardly) vary over time.
+
+## Time Fixed Effects
+
+- The basic fixed effects model only prevents omitted variable bias from
+variables that do not change over time.
+
+- However, panel data allow us to control also for omitted variable bias
+from one other type of omitted variable.
+
+- In the traffic fatalities example technical progress could be an
+important determinant of the number of deaths and could also be
+correlated with alcohol taxes.
+
+- At the same time this variable probably affects all states in the same
+way (i.e. does not vary across states).
+
+## Time and Unit Fixed Effects
+
+- In most applications we use both unit and time fixed effects at the
+same time.
+
+- This model is sometimes referred to as the “twoway fixed effects” model.
+
+- In the literature the cross-sectional fixed effects are referred to as
+“fixed effects”, “state (fixed) effects”, “firm (fixed) effects” or
+“person (fixed) effects”.
+
+- Similarly, time fixed effects are often referred to as “time effects”.
+
+# Violations of Assumptions
+
+## Assumption 2 in Panel Data
+
+- Panel data is characterized by time dependency for each panel unit.
+
+- As discussed in Week 6, this is a violation of the regression Assumption
+2 (X and Y are i.i.d).
+
+### Serial Correlation
+
+- Time dependency is often described as autocorrelation or serial correlation.
+
+- The main approach to deal with serial correlation is by adjusting standard errors to take into account autocorrelation.
+
+- If there is substantial autocorrelation (serial correlation) in the error term, even heteroskedasticity-robust standard errors will be inconsistent.
+
+- In panel data as in any other time series data, autocorrelation can be a very serious concern.
+
+- We can test for serial correlation after our fixed effects estimation using the Breusch-Godfrey test.
+
+- The null hypothesis in this test is that the autocorrelation of the error term is 0.
+
+### Cross-sectional dependence
+
+- Cross-sectional dependence in panels may arise when e.g. countries respond to common shocks or if spatial diffusion processes are present (think Arab Spring, or shocks from the financial crisis).
+
+- If cross-sectional dependence is present, this results, at least, in the inefficiency of the estimators and invalid inference when using standard estimation techniques.
+
+- This is another instance of the violation of regression Assumption 2.
+
+- If we assume that our earlier two-way fixed effects model specification is consistent, then we can test for residual cross-sectional dependence
+after the introduction of two-way fixed effects to account for common shocks.
+
+## Panel-corrected Standard Errors
+
+- Panel-corrected standard errors (Beck and Katz 1995)
+
+    - **panel heteroskedasticity**: each country may have its own error variance
+
+    - **contemporaneous correlation of the errors**: the error for one country may be correlated with the errors for other countries in the same year
+
+    - **serially correlated errors**: the errors for a given country are correlated with previous errors for that country
+
+## General Approach to Correlation Between Panels
+
+- Driscoll and Kraay (1998) propose an estimator producing heteroskedasticity- and autocorrelation- consistent standard errors that are robust to general forms of spatial and temporal dependence. Often known as the SCC estimator.
+
+- Panel Corrected Standard Errors (PCSE), while popular in political science, may not work well with shorter panels with large N (ratio of T/N is small).
+
+- SCC estimator performs equally well in large N settings.
+
+## Your Roadmap with Panel Data
+
+- Is it a fixed effects or random effects model?
+
+- Hausman test. But primarily the choice should be driven by theory!
+
+- Use robust standard errors, start with HAC.
+
+- Check whether there is any cross-sectional dependence:
+
+- If not, you can stick to HAC.
+
+- If you have cross-sectional dependence, you need to use PCSE or SCC (use SCC).
+

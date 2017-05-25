@@ -1,0 +1,189 @@
+# Hands-on Tutorial
+
+Let's start by load these packages:
+
+```{r message = FALSE}
+library(plm)
+library(lmtest)
+library(texreg)
+```
+
+Clear the environment
+
+```{r}
+rm(list = ls())
+```
+
+## More Guns, Less Crimes
+
+Download the guns dataset used by Stock and Watson. 
+
+- **[Dataset](http://uclspp.github.io/PUBLG100/data/guns.csv)**
+- **[Codebook](http://wps.aw.com/wps/media/objects/11422/11696965/data3eu/Guns_Description.pdf)**
+
+Gun rights advocate John Lott argues in his book [More Guns, Less Crimes](https://en.wikipedia.org/wiki/More_Guns,_Less_Crime) that crime rates in the United States decrease when gun ownership restrictions are relaxed. The data used in Lott's research compares violent crimes, robberies, and murders across 50 states to determine whether the so called "shall" laws that remove discretion from license granting authorities actually decrease crime rates. So far 41 states have passed these "shall" laws where a person applying for a licence to carry a concealed weapon doesn't have to provide justification or "good cause" for requiring a concealed weapon permit.
+
+Let's load the dataset used by Lott and see if we can test the arguments made by gun rights advocates.
+
+```{r}
+guns <- read.csv("guns.csv")
+```
+
+The variables we're interested in are described below.
+
+|Variable|Definition|
+|------------|--------------------------------------------------------|
+|mur|Murder rate (incidents per 100,000)|
+|shall|= 1 if the state has a shall-carry law in effect in that year <br>= 0 otherwise|
+|incarc_rate|Incarceration rate in the state in the previous year (sentenced prisoners per 100,000 residents; value for the previous year)|
+|pm1029|Percent of state population that is male, ages 10 to 29|
+|stateid|ID number of states (Alabama = 1, Alaska = 2, etc.)|
+|year|Year (1977-1999)|
+
+We will focus on murder rates in this example but you could try the same with variables measuring violent crimes or robberies as well.
+
+Let's create a factor variable representing whether a state has passed "shall" law or not. The variable already exists as `0` or `1` but we want to convert it to a factor for our analysis.
+
+```{r}
+guns$shall <- factor(guns$shall, levels = c(0, 1), labels =c("NO", "YES"))
+```
+
+## Fixed Effects
+
+Let's estimate a fixed effect model on panel data using the `plm()` function with `shall`, `incarc_rate`, and `pm1029` as the independent variables.
+
+```{r}
+state_effects <- plm(mur ~ shall + incarc_rate + pm1029, 
+                     data = guns, 
+                     index = c("stateid", "year"), 
+                     model = "within", 
+                     effect = "individual")
+
+summary(state_effects)
+```
+
+The `state_effects` model shows that all three of our independent variables are statistically significant, with `shall` decreasing murder rates by `1.45` incidents per `100000` members of the population. The effects of incarceration rate and percentage of male population between `10` and `29` years old are also statistically significant.
+
+Before drawing any conclusions let's make sure whether there are any state effects in our model using [`plmtest()`](http://bit.ly/r_plmtest).
+
+```{r}
+plmtest(state_effects, effect="individual")
+```
+
+The p-value suggests the presence of state effects. In addition to state fixed effects, a number of factors could affect the murder rate that are not specific to an individual state. We can model these time fixed effects using the `effect = "time"` argument in [`plm()`](http://bit.ly/r_plm).
+
+```{r}
+time_effects <- plm(mur ~ shall + incarc_rate + pm1029, 
+                    data = guns, 
+                    index = c("stateid", "year"), 
+                    model = "within", 
+                    effect = "time")
+
+summary(time_effects)
+```
+
+The `incarc_rate` variable is the only statistically significant variable in the time fixed effects model. 
+
+Now let's run `plmtest` on the `time_effects` model to verify if time fixed effects are indeed present in the model.
+
+```{r}
+plmtest(time_effects, effect="time")
+```
+
+The *p-value* tells us that we can reject the null hypothesis so we know that there are time fixed effects present in our model. 
+
+We already confirmed the presence of state fixed effects in the first model we estimated. Now, in order to control for both state AND time fixed effects, we need to estimate a model using the `effect = "twoways"` argument.
+
+```{r}
+twoway_effects <- plm(mur ~ shall + incarc_rate + pm1029, 
+                      data = guns, 
+                      index = c("stateid", "year"), 
+                      model = "within", 
+                      effect = "twoways")
+
+summary(twoway_effects)
+```
+
+In a twoway fixed effects model `shall` is no longer significant and the effect of male population between `10` and `29` years old has decreased from `0.95` to `0.73` incidents per `100,000` population.
+
+The results of all three models are shown below. 
+
+```{r}
+screenreg(list(state_effects, time_effects, twoway_effects), 
+          custom.model.names = c("State Fixed Effects", 
+                                 "Time Fixed Effects", 
+                                 "Twoway Fixed Effects"))
+```
+
+## Serial Correlation
+
+For time series data we need to address the potential for serial correlation in the error term. We will test for serial correlation with Breusch-Godfrey test using `pbgtest()` and provide solutions for correcting it if necessary.
+
+```{r}
+pbgtest(twoway_effects)
+```
+
+The null hypothesis for the Breusch-Godfrey test is that there is no serial correlation. The `p-value` from the test tells us that we can reject the null hypothesis and confirms the presence of serial correlation in our error term.
+
+We can correct for serial correlation using [`coeftest()`](http://bit.ly/r_coeftest) similar to how we corrected for heteroskedastic errors. We'll use the [`vcovHC()`](http://bit.ly/r_vcovHC) function for obtaining a heteroskedasticity-consistent covariance matrix, but since we're interested in correcting for autocorrelation as well, we will specify `method = "arellano"` which corrects for both heteroskedasticity and autocorrelation.
+
+```{r}
+twoway_effects_hac <- coeftest(twoway_effects, 
+                               vcov = vcovHC(twoway_effects, 
+                                             method = "arellano", 
+                                             type = "HC3"))
+
+screenreg(list(twoway_effects, twoway_effects_hac),
+          custom.model.names = c("Twoway Fixed Effects", 
+                                 "Twoway Fixed Effects (HAC)"))
+```
+
+We can see that with heteroskedasticity and autocorrelation consistent (HAC) standard errors, the percent of male population (10 - 29 yr old) is no longer a significant predictor in our model.
+
+## Cross-sectional Dependence
+
+If a federal law imposed restrictions on gun ownership or licensing requirements then the changes would likely affect all 50 states. This is an example of Cross Sectional Dependence and not accounted for in a fixed effect model. Other scenarios could also trigger cross sectional dependence that we should take into consideration. For example, security policies and law enforcement efforts might change after an extraordinary event (think of mass shootings or terrorist attacks) thus influencing law enforcement practices in all states. We can check for cross sectional dependence using the Pesaran cross sectional dependence test or [`pcdtest()`](http://bit.ly/r_pcdtest).
+
+```{r}
+pcdtest(twoway_effects)
+```
+
+As we've seen with other tests, the null hypothesis is that there is no cross sectional dependence. The p-value, however tells that there is indeed cross-sectional dependence and we need to correct it. There are two general approaches to correcting for cross sectional dependence. 
+
+**Beck and Katz (1995) method or Panel Corrected Standard Errors (PCSE)**: We can obtain Panel Corrected Standard Errors (PCSE) by first obtaining a robust variance-covariance matrix for panel models with the Beck and Katz (1995) method using the [`vcovBK()`]((http://bit.ly/r_vcovBK)) and passing it to the familiar [`coeftest()`](http://bit.ly/r_coeftest) function.
+
+```{r}
+twoway_effects_pcse <- coeftest(twoway_effects, 
+                                vcov = vcovBK(twoway_effects, 
+                                              type="HC3", 
+                                              cluster = "group")) 
+
+twoway_effects_pcse
+```
+
+The results from PCSE are sensitive to the ratio between the number of time periods in the dataset (T) and the total number of observations (N). When we're dealing with large datasets (i.e. the T/N ratio is small), we use the Driscoll and Kraay method instead.
+
+**Driscoll and Kraay (1998) (SCC)**: The cross-sectional and serial correlation (SCC) method by Driscoll and Kraay addresses the limitations of Beck and Katz's PCSE method is therefore preferred for obtaining heteroskedasticity and autocorrelation consistent errors that are also robust to cross-sectional dependence. We can get SCC corrected covariance matrix using the [`vcovSCC()`](http://bit.ly/r_vcovSCC) function.
+
+```{r}
+twoway_effects_scc <- coeftest(twoway_effects,
+                               vcov = vcovSCC(twoway_effects, 
+                                              type="HC3", 
+                                              cluster = "group"))
+
+twoway_effects_scc
+```
+
+```{r}
+screenreg(list(state_effects, 
+               time_effects, 
+               twoway_effects, 
+               twoway_effects_pcse, 
+               twoway_effects_scc), 
+          custom.model.names = c("State Effects", 
+                                 "Time Effects", 
+                                 "Twoway Fixed Effects", 
+                                 "PCSE", 
+                                 "SCC"))
+```
+

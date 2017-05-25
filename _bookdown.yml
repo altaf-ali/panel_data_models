@@ -1,5 +1,8 @@
 rmd_files: [
   "index.Rmd",
-  "acknowledgments.Rmd"
+  "acknowledgments.Rmd",
+  "panel_data_models.Rmd",
+  "tutorial.Rmd",
+  "exercises.Rmd"
 ]
 
